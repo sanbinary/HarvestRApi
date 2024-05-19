@@ -3,9 +3,10 @@ import path from "path";
 import url from "url";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import cors from "cors";
 
 import { default as indexRouter } from "./routes/index.js";
-import { default as usersRouter } from "./routes/users.js";
+import { default as parseRouter } from "./routes/parse.js";
 
 const app = express();
 
@@ -16,8 +17,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/parse", parseRouter);
 
 export default app;
